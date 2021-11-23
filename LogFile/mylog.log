@@ -2487,3 +2487,34 @@ Offending resource: class path resource [com/technoelevate/springboot/security/S
 2021-11-23 18:27:04,746  [Thread-27]  [36mo.s.o.j.LocalContainerEntityManagerFactoryBean[0;39m - Closing JPA EntityManagerFactory for persistence unit 'default' 
 2021-11-23 18:27:04,747  [Thread-27]  [36mc.z.h.HikariDataSource[0;39m - HikariPool-7 - Shutdown initiated... 
 2021-11-23 18:27:04,752  [Thread-27]  [36mc.z.h.HikariDataSource[0;39m - HikariPool-7 - Shutdown completed. 
+2021-11-23 18:27:04,925  [restartedMain]  [36mc.t.s.BankApplication[0;39m - Starting BankApplication using Java 15 on DESKTOP-7G56MR9 with PID 2596 (E:\TechnoElevate_Spring Boot Rest\bank-application\target\classes started by Sahid in E:\TechnoElevate_Spring Boot Rest\bank-application) 
+2021-11-23 18:27:04,926  [restartedMain]  [36mc.t.s.BankApplication[0;39m - No active profile set, falling back to default profiles: default 
+2021-11-23 18:27:05,380  [restartedMain]  [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Bootstrapping Spring Data JPA repositories in DEFAULT mode. 
+2021-11-23 18:27:05,393  [restartedMain]  [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Finished Spring Data repository scanning in 12 ms. Found 3 JPA repository interfaces. 
+2021-11-23 18:27:05,702  [restartedMain]  [36mo.s.b.w.e.t.TomcatWebServer[0;39m - Tomcat initialized with port(s): 8080 (http) 
+2021-11-23 18:27:05,703  [restartedMain]  [36mo.a.c.c.StandardService[0;39m - Starting service [Tomcat] 
+2021-11-23 18:27:05,703  [restartedMain]  [36mo.a.c.c.StandardEngine[0;39m - Starting Servlet engine: [Apache Tomcat/9.0.54] 
+2021-11-23 18:27:05,735  [restartedMain]  [36mo.a.c.c.C.[.[.[/][0;39m - Initializing Spring embedded WebApplicationContext 
+2021-11-23 18:27:05,736  [restartedMain]  [36mo.s.b.w.s.c.ServletWebServerApplicationContext[0;39m - Root WebApplicationContext: initialization completed in 807 ms 
+2021-11-23 18:27:05,834  [restartedMain]  [36mo.h.j.i.u.LogHelper[0;39m - HHH000204: Processing PersistenceUnitInfo [name: default] 
+2021-11-23 18:27:05,844  [restartedMain]  [36mc.z.h.HikariDataSource[0;39m - HikariPool-8 - Starting... 
+2021-11-23 18:27:05,851  [restartedMain]  [36mc.z.h.HikariDataSource[0;39m - HikariPool-8 - Start completed. 
+2021-11-23 18:27:05,852  [restartedMain]  [36mo.h.d.Dialect[0;39m - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect 
+2021-11-23 18:27:06,110  [restartedMain]  [36mo.h.e.t.j.p.i.JtaPlatformInitiator[0;39m - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform] 
+2021-11-23 18:27:06,111  [restartedMain]  [36mo.s.o.j.LocalContainerEntityManagerFactoryBean[0;39m - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+2021-11-23 18:27:06,365  [restartedMain]  [36mo.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration[0;39m - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning 
+2021-11-23 18:27:06,720  [restartedMain]  [36mo.s.s.w.DefaultSecurityFilterChain[0;39m - Will secure Ant [pattern='/v2/api-docs'] with [] 
+2021-11-23 18:27:06,720  [restartedMain]  [36mo.s.s.w.DefaultSecurityFilterChain[0;39m - Will secure Ant [pattern='/swagger-resources/configuration/ui'] with [] 
+2021-11-23 18:27:06,721  [restartedMain]  [36mo.s.s.w.DefaultSecurityFilterChain[0;39m - Will secure Ant [pattern='/swagger-resources'] with [] 
+2021-11-23 18:27:06,721  [restartedMain]  [36mo.s.s.w.DefaultSecurityFilterChain[0;39m - Will secure Ant [pattern='/swagger-resources/configuration/security'] with [] 
+2021-11-23 18:27:06,721  [restartedMain]  [36mo.s.s.w.DefaultSecurityFilterChain[0;39m - Will secure Ant [pattern='/swagger-ui.html'] with [] 
+2021-11-23 18:27:06,721  [restartedMain]  [36mo.s.s.w.DefaultSecurityFilterChain[0;39m - Will secure Ant [pattern='/webjars/**'] with [] 
+2021-11-23 18:27:06,736  [restartedMain]  [36mo.s.s.w.DefaultSecurityFilterChain[0;39m - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5c29359b, org.springframework.security.web.context.SecurityContextPersistenceFilter@48bccbd0, org.springframework.security.web.header.HeaderWriterFilter@686b601c, org.springframework.security.web.authentication.logout.LogoutFilter@61eeb25a, com.technoelevate.springboot.filter.CustomerAuthorizationFilter@3f5e2473, com.technoelevate.springboot.filter.CustomAuthenticattionFilter@31c4642b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2a29f5fb, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@19710b22, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@e10b3ec, org.springframework.security.web.session.SessionManagementFilter@33fcbf36, org.springframework.security.web.access.ExceptionTranslationFilter@4774a07c, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@53fd82d5] 
+2021-11-23 18:27:06,751  [restartedMain]  [36ms.d.s.w.PropertySourcedRequestMappingHandlerMapping[0;39m - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)] 
+2021-11-23 18:27:06,867  [restartedMain]  [36mo.s.b.d.a.OptionalLiveReloadServer[0;39m - LiveReload server is running on port 35729 
+2021-11-23 18:27:06,972  [restartedMain]  [36mo.s.b.w.e.t.TomcatWebServer[0;39m - Tomcat started on port(s): 8080 (http) with context path '' 
+2021-11-23 18:27:06,973  [restartedMain]  [36ms.d.s.w.p.DocumentationPluginsBootstrapper[0;39m - Context refreshed 
+2021-11-23 18:27:06,975  [restartedMain]  [36ms.d.s.w.p.DocumentationPluginsBootstrapper[0;39m - Found 1 custom documentation plugin(s) 
+2021-11-23 18:27:06,982  [restartedMain]  [36ms.d.s.w.s.ApiListingReferenceScanner[0;39m - Scanning for api listing references 
+2021-11-23 18:27:07,056  [restartedMain]  [36mc.t.s.BankApplication[0;39m - Started BankApplication in 2.189 seconds (JVM running for 13175.695) 
+2021-11-23 18:27:07,059  [restartedMain]  [36mo.s.b.d.a.ConditionEvaluationDeltaLoggingListener[0;39m - Condition evaluation unchanged 
