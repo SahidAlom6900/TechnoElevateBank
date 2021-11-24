@@ -15,6 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.technoelevate.springboot.entity.Admin;
 import com.technoelevate.springboot.entity.Customer;
+import com.technoelevate.springboot.entity.CustomerDto;
 import com.technoelevate.springboot.message.Message;
 import com.technoelevate.springboot.repository.AdminRepository;
 import com.technoelevate.springboot.repository.CustomerRepository;
@@ -30,13 +31,6 @@ public class AdminTestService {
 	@InjectMocks
 	private AdminServiceImpl service;
 
-//	@Test
-//	public void loginTestService() {
-//		Admin admin1 = new Admin("Rakesh", "rakesh@123");
-//		Mockito.when(adminRepository.findByUserName(admin1.getUserName())).thenReturn(admin1);
-//		Admin admin2 = (Admin) service.findByUserName(admin1.getUserName(), admin1.getPassword()).getData();
-//		assertEquals(admin1.getUserName(), admin2.getUserName());
-//	}
 
 	@SuppressWarnings({ "unchecked", "unused" })
 	@Test
@@ -44,10 +38,10 @@ public class AdminTestService {
 		Admin admin = new Admin("Rakesh", "rakesh@123");
 		List<Customer> list = new ArrayList<Customer>();
 		Customer customer = new Customer("Sahid", 8754854754l, "sahid@123", 10000, 0);
-//		list.add(customer);
+		list.add(customer);
 		Mockito.when(repository.findAll()).thenReturn(list);
 		Message message = service.getAllCustomer();
-		ArrayList<Customer> customer1=(ArrayList<Customer>)message.getData();
+		ArrayList<CustomerDto> customer1=(ArrayList<CustomerDto>)message.getData();
 		assertEquals(customer.getUserName(),customer1.get(0).getUserName());
 	}
 

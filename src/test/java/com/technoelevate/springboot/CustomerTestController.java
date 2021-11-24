@@ -41,27 +41,6 @@ public class CustomerTestController {
 		this.mapper = new ObjectMapper();
 	}
 
-//	@SuppressWarnings({ "unchecked"})
-//	@Test
-//	public void testUserLogin() throws UnsupportedEncodingException, Exception {
-//		UserPasswordDTO dto = new UserPasswordDTO("Sahid", "sahid@123");
-//		Customer customer = new Customer(dto.getUserName(), dto.getPassword());
-//		Message message = new Message();
-//		message.setData(customer);
-//		Mockito.when(customerService.findByUserName(Mockito.any(), Mockito.any())).thenReturn(message);
-//		String jsonObject = mapper.writeValueAsString(dto);
-//		String result = mockMvc
-//				.perform(post("/customer/login").contentType(MediaType.APPLICATION_JSON).content(jsonObject)
-//						.accept(MediaType.APPLICATION_JSON))
-//				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn().getResponse().getContentAsString();
-//		Message message2 = mapper.readValue(result, Message.class);
-//		Map<String, String> map = (Map<String, String>) message2.getData();
-//		for (Map.Entry<String, String> dto1 : map.entrySet()) {
-//			assertEquals(dto.getUserName(), dto1.getValue());
-//			break;
-//		}
-//	}
-
 	@SuppressWarnings({ "unchecked"})
 	@Test
 	public void testDeposite() throws Exception {
@@ -72,7 +51,7 @@ public class CustomerTestController {
 		Mockito.when(customerService.deposite(Mockito.anyDouble())).thenReturn(message);
 		String jsonObject = mapper.writeValueAsString(dto);
 		String result = mockMvc
-				.perform(put("/customer/deposite/" + 1000).sessionAttr("customer", customer)
+				.perform(put("/api/v1/customer/deposite/" + 1000).sessionAttr("customer", customer)
 						.contentType(MediaType.APPLICATION_JSON).content(jsonObject))
 				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn().getResponse().getContentAsString();
 		System.out.println(result);
@@ -94,7 +73,7 @@ public class CustomerTestController {
 		Mockito.when(customerService.withdraw(Mockito.anyDouble())).thenReturn(message);
 		String jsonObject = mapper.writeValueAsString(dto);
 		String result = mockMvc
-				.perform(put("/customer/withdraw/" + 1000).sessionAttr("customer", customer)
+				.perform(put("/api/v1/customer/withdraw/" + 1000).sessionAttr("customer", customer)
 						.contentType(MediaType.APPLICATION_JSON).content(jsonObject))
 				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn().getResponse().getContentAsString();
 		Message message2 = mapper.readValue(result, Message.class);
@@ -115,7 +94,7 @@ public class CustomerTestController {
 		Mockito.when(customerService.getBalance()).thenReturn(message1);
 		String jsonObject = mapper.writeValueAsString(dto);
 		String result = mockMvc
-				.perform(get("/customer/balance").sessionAttr("customer", customer)
+				.perform(get("/api/v1/customer/balance").sessionAttr("customer", customer)
 						.contentType(MediaType.APPLICATION_JSON).content(jsonObject))
 				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn().getResponse().getContentAsString();
 		Message message2 = mapper.readValue(result, Message.class);
@@ -125,24 +104,4 @@ public class CustomerTestController {
 			break;
 		}
 	}
-//
-//	@SuppressWarnings({ "unchecked" })
-//	@Test
-//	public void logoutCustomer() throws Exception {
-//		UserPasswordDTO dto = new UserPasswordDTO("Sahid", "sahid@123");
-//		Customer customer = new Customer(dto.getUserName(), dto.getPassword());
-//		Message message1 = new Message();
-//		message1.setData(customer);
-//		String jsonObject = mapper.writeValueAsString(dto);
-//		String result = mockMvc
-//				.perform(get("/customer/logout").sessionAttr("customer", customer)
-//						.contentType(MediaType.APPLICATION_JSON).content(jsonObject))
-//				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn().getResponse().getContentAsString();
-//		Message message2 = mapper.readValue(result, Message.class);
-//		Map<String, String> map = (Map<String, String>) message2.getData();
-//		for (Map.Entry<String, String> dto1 : map.entrySet()) {
-//			assertEquals(dto.getUserName(), dto1.getValue());
-//			break;
-//		}
-//	}
 }

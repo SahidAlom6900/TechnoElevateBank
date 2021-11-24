@@ -40,30 +40,6 @@ public class AdminControllerTest {
 		this.mapper=new ObjectMapper();
 	}
 
-//	@SuppressWarnings({ "unchecked" })
-//	@Test
-//	public void loginTestController() throws Exception {
-//		System.out.println(mockMvc);
-//		Admin admin = new Admin("Rakesh", "rakesh@123");
-//		Message message = new Message();
-//		message.setData(admin);
-//		Mockito.when(adminService.findByUserName(Mockito.any(), Mockito.any())).thenReturn(message);
-//		String jsonObject = mapper.writeValueAsString(admin);
-//		System.out.println(jsonObject);
-//		String result = mockMvc
-//				.perform(post("/admin/login").contentType(MediaType.APPLICATION_JSON_VALUE).content(jsonObject)
-//						.accept(MediaType.APPLICATION_JSON_VALUE))
-//				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn().getResponse().getContentAsString();
-//		System.out.println(result);
-//		Message c = mapper.readValue(result, Message.class);
-//		Map<String, String> map = (Map<String, String>) c.getData();
-//		for (Map.Entry<String, String> m : map.entrySet()) {
-//			assertEquals(admin.getUserName(), m.getValue());
-//			break;
-//		}
-//
-//	}
-
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testControllerReadAll() throws Exception {
@@ -73,7 +49,7 @@ public class AdminControllerTest {
 		Mockito.when(adminService.getAllCustomer()).thenReturn(message);
 		String jsonObject = mapper.writeValueAsString(admin);
 		String result = mockMvc
-				.perform(get("/admin/customers").sessionAttr("admin", admin).contentType(MediaType.APPLICATION_JSON)
+				.perform(get("/api/v1/admin/customers").contentType(MediaType.APPLICATION_JSON)
 						.content(jsonObject))
 				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn().getResponse().getContentAsString();
 		Message c = mapper.readValue(result, Message.class);
@@ -83,23 +59,4 @@ public class AdminControllerTest {
 			break;
 		}
 	}
-//
-//	@SuppressWarnings({ "unchecked" })
-//	@Test
-//	public void logoutAdminController() throws Exception {
-//		Admin admin = new Admin("Rakesh", "rakesh@123");
-//		Message message = new Message();
-//		message.setData(admin);
-//		String jsonObject = mapper.writeValueAsString(admin);
-//		String result = mockMvc
-//				.perform(get("/admin/logout").sessionAttr("admin", admin).contentType(MediaType.APPLICATION_JSON)
-//						.content(jsonObject))
-//				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn().getResponse().getContentAsString();
-//		Message c = mapper.readValue(result, Message.class);
-//		Map<String, String> map = (Map<String, String>) c.getData();
-//		for (Map.Entry<String, String> m : map.entrySet()) {
-//			assertEquals(admin.getUserName(), m.getValue());
-//			break;
-//		}
-//	}
 }
