@@ -39,14 +39,13 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-		if (!username.equals("Rakesh")) {
+		if (!username.equals("ADMIN")) {
 			customer = repository.findByUserName(username);
 			System.out.println(customer);
 			if (customer == null) {
 				log.error("Please Enter your Correct User Name");
 			} else {
 				authorities.add(new SimpleGrantedAuthority("USER"));
-//				return new CustomerUserDetailsService(authorities, username, customer.getPassword(), true, true, true, true);
 				return new User(customer.getUserName(), customer.getPassword(), authorities);
 			}
 		} else {
@@ -55,7 +54,6 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
 				log.error("Please Enter your Correct User Name");
 			} else {
 				authorities.add(new SimpleGrantedAuthority("ADMIN"));
-//				return new CustomerUserDetailsService(authorities, username, admin.getPassword(), true, true, true, true);
 				return new User(admin.getUserName(), admin.getPassword(), authorities);
 			}
 		}
@@ -127,7 +125,7 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
 
 	@Override
 	public Customer findByUserName(String userName) {
-		Customer customer = (Customer) repository.findByUserName(userName);
+		customer = (Customer) repository.findByUserName(userName);
 		if (customer == null || customer.getUserName() == null) {
 			log.error("User Name Does Not Exist!!!");
 		}
