@@ -27,7 +27,8 @@ import com.technoelevate.springboot.service.CustomerServiceImpl;;
 public class CustomerAuthorizationFilter extends OncePerRequestFilter {
 	private CustomAccessDeniedException accessDenied;
 	private CustomerServiceImpl serviceImpl;
-	public CustomerAuthorizationFilter(CustomAccessDeniedException accessDenied,CustomerServiceImpl serviceImpl) {
+
+	public CustomerAuthorizationFilter(CustomAccessDeniedException accessDenied, CustomerServiceImpl serviceImpl) {
 		this.accessDenied = accessDenied;
 		this.serviceImpl = serviceImpl;
 	}
@@ -47,14 +48,17 @@ public class CustomerAuthorizationFilter extends OncePerRequestFilter {
 					JWTVerifier verifier = JWT.require(algorithm).build();
 					DecodedJWT decodedJWT = verifier.verify(token);
 					String username = decodedJWT.getSubject();
-					if (!serviceImpl.getCustomer().getUserName().equals(username)) {
-						try {
-							accessDenied.handle(request, response, new AccessDeniedException("Unauthorized Access Token"));
-						} catch (Exception exception2) {
-							System.out.println(exception2.getMessage());
+					String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
+					if (!roles[0].equalsIgnoreCase("ADMIN")) {
+						if (!serviceImpl.getCustomer().getUserName().equals(username)) {
+							try {
+								accessDenied.handle(request, response,
+										new AccessDeniedException("Unauthorized Access Token"));
+							} catch (Exception exception2) {
+								System.out.println(exception2.getMessage());
+							}
 						}
 					}
-					String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
 					Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
 					stream(roles).forEach(role -> authorities.add(new SimpleGrantedAuthority(role)));
 					UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(

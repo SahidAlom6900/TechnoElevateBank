@@ -20,16 +20,19 @@ public class CustomAccessDeniedException implements AccessDeniedHandler {
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response,
 			AccessDeniedException exception) throws IOException, ServletException {
-		response.setHeader("error", exception.getMessage());
-		response.setStatus(HttpStatus.FORBIDDEN.value());
-		HashMap<String, String> error = new HashMap<>();
-		error.put("statusCode", HttpStatus.FORBIDDEN.toString());
-		error.put("timestamp", LocalDateTime.now().toString());
-		error.put("error", exception.getMessage());
-		error.put("message", "Access Denied");
-		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-		new ObjectMapper().writeValue(response.getOutputStream(), error);
-
+		try {
+			response.setHeader("error", exception.getMessage());
+			response.setStatus(HttpStatus.FORBIDDEN.value());
+			HashMap<String, String> error = new HashMap<>();
+			error.put("statusCode", HttpStatus.FORBIDDEN.toString());
+			error.put("timestamp", LocalDateTime.now().toString());
+			error.put("error", exception.getMessage());
+			error.put("message", "Access Denied");
+			response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+			new ObjectMapper().writeValue(response.getOutputStream(), error);
+		} catch (Exception exception2) {
+			exception2.printStackTrace();
+		} 
 	}
 
 }
