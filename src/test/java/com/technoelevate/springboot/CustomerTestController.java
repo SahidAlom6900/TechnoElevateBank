@@ -51,7 +51,7 @@ public class CustomerTestController {
 		Mockito.when(customerService.deposite(Mockito.anyDouble())).thenReturn(message);
 		String jsonObject = mapper.writeValueAsString(dto);
 		String result = mockMvc
-				.perform(put("/api/v1/customer/deposite/" + 1000).sessionAttr("customer", customer)
+				.perform(put("/api/v1/customer/deposite/" + 1000)
 						.contentType(MediaType.APPLICATION_JSON).content(jsonObject))
 				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn().getResponse().getContentAsString();
 		System.out.println(result);
@@ -73,7 +73,7 @@ public class CustomerTestController {
 		Mockito.when(customerService.withdraw(Mockito.anyDouble())).thenReturn(message);
 		String jsonObject = mapper.writeValueAsString(dto);
 		String result = mockMvc
-				.perform(put("/api/v1/customer/withdraw/" + 1000).sessionAttr("customer", customer)
+				.perform(put("/api/v1/customer/withdraw/" + 1000)
 						.contentType(MediaType.APPLICATION_JSON).content(jsonObject))
 				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn().getResponse().getContentAsString();
 		Message message2 = mapper.readValue(result, Message.class);
@@ -94,7 +94,7 @@ public class CustomerTestController {
 		Mockito.when(customerService.getBalance()).thenReturn(message1);
 		String jsonObject = mapper.writeValueAsString(dto);
 		String result = mockMvc
-				.perform(get("/api/v1/customer/balance").sessionAttr("customer", customer)
+				.perform(get("/api/v1/customer/balance")
 						.contentType(MediaType.APPLICATION_JSON).content(jsonObject))
 				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn().getResponse().getContentAsString();
 		Message message2 = mapper.readValue(result, Message.class);
