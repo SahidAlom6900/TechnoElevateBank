@@ -16,9 +16,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.technoelevate.springboot.entity.Admin;
 import com.technoelevate.springboot.entity.Customer;
 import com.technoelevate.springboot.entity.CustomerDto;
-import com.technoelevate.springboot.message.Message;
 import com.technoelevate.springboot.repository.AdminRepository;
 import com.technoelevate.springboot.repository.CustomerRepository;
+import com.technoelevate.springboot.response.ResponseMessage;
 import com.technoelevate.springboot.service.AdminServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
@@ -38,9 +38,10 @@ public class AdminTestService {
 		Admin admin = new Admin("Rakesh", "rakesh@123");
 		List<Customer> list = new ArrayList<Customer>();
 		Customer customer = new Customer("Sahid", 8754854754l, "sahid@123", 10000, 0);
+		customer.setRoles("USER");
 		list.add(customer);
 		Mockito.when(repository.findAll()).thenReturn(list);
-		Message message = service.getAllCustomer();
+		ResponseMessage message = service.getAllCustomer();
 		ArrayList<CustomerDto> customer1=(ArrayList<CustomerDto>)message.getData();
 		assertEquals(customer.getUserName(),customer1.get(0).getUserName());
 	}

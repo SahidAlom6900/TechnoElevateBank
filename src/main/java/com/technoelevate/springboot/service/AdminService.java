@@ -1,10 +1,10 @@
 package com.technoelevate.springboot.service;
 
-import com.technoelevate.springboot.message.Message;
+import com.technoelevate.springboot.response.ResponseMessage;
 
 public interface AdminService {
 
 //	Message findByUserName(String userName, String password);
 
-	Message getAllCustomer();
+	ResponseMessage getAllCustomer();
 }

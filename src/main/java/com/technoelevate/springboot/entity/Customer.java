@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-@JsonIgnoreProperties({ "cid", "password", "balance", "count","accountNonLocked","failedAttempt","lockTime" })
+@JsonIgnoreProperties({ "cid", "password", "balance", "count","accountNonLocked","failedAttempt","lockTime","roles" })
 @Table(name = "customer_details", uniqueConstraints = @UniqueConstraint(columnNames = { "userName", "accountNo" }))
 public class Customer implements Serializable {
 	@Id
@@ -36,6 +36,7 @@ public class Customer implements Serializable {
 	private boolean accountNonLocked;
 	private int failedAttempt;
 	private Date lockTime;
+	private String roles;
 	
 	@OneToMany( mappedBy = "customer")
 	private List<BalanceDetails> balanceDetails;

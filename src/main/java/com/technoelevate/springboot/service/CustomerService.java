@@ -1,7 +1,7 @@
 package com.technoelevate.springboot.service;
 
 import com.technoelevate.springboot.entity.Customer;
-import com.technoelevate.springboot.message.Message;
+import com.technoelevate.springboot.response.ResponseMessage;
 
 public interface CustomerService {
 
@@ -9,11 +9,11 @@ public interface CustomerService {
 
 	Customer findByUserName(String userName);
 
-	Message deposite(double amount);
+	ResponseMessage deposite(double amount);
 
-	Message withdraw(double amount);
+	ResponseMessage withdraw(double amount);
 
-	Message getBalance();
+	ResponseMessage getBalance();
 
 	void fialedAttempt(Customer customer);
 	

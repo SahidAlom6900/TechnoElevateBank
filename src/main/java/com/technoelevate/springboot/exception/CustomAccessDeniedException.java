@@ -15,6 +15,8 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 public class CustomAccessDeniedException implements AccessDeniedHandler {
 
 	@Override
@@ -28,6 +30,7 @@ public class CustomAccessDeniedException implements AccessDeniedHandler {
 			error.put("timestamp", LocalDateTime.now().toString());
 			error.put("error", exception.getMessage());
 			error.put("message", "Access Denied");
+			log.error(exception.getMessage());
 			response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 			new ObjectMapper().writeValue(response.getOutputStream(), error);
 		} catch (Exception exception2) {

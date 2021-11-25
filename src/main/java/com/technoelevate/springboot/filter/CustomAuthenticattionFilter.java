@@ -56,6 +56,7 @@ public class CustomAuthenticattionFilter extends UsernamePasswordAuthenticationF
 		Authentication authenticate = null;
 		try {
 			authenticate = authenticationManager.authenticate(authenticationToken);
+			log.info("Authentication Successfully!!!");
 		} catch (Exception exception) {
 			try {
 				log.error(exception.getMessage());
@@ -82,6 +83,7 @@ public class CustomAuthenticattionFilter extends UsernamePasswordAuthenticationF
 		String refresh_token = JWT.create().withSubject(user.getUsername())
 				.withExpiresAt(new Date(System.currentTimeMillis() + config.getRefresh_token()))
 				.withIssuer(request.getRequestURI().toString()).sign(algorithm);
+		log.info("Generate access token And refresh token Successfully");
 		LinkedHashMap<String, Object> infomation = new LinkedHashMap<>();
 		LinkedHashMap<String, Object> tokens = new LinkedHashMap<>();
 		infomation.put("error", false); 

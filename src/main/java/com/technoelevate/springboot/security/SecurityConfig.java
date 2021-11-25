@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"/swagger-resources/configuration/ui", "/swagger-resources",
 						"/swagger-resources/configuration/security", "/swagger-ui.html", "/webjars/**")
 				.permitAll();
-		http.authorizeRequests().antMatchers("/api/v1/customer/**").hasAnyAuthority("USER");
+		http.authorizeRequests().antMatchers("/api/v1/customer/**").hasAnyAuthority("USER","ADMIN");
 		http.authorizeRequests().antMatchers("/api/v1/admin/**").hasAnyAuthority("ADMIN");
 		http.authorizeRequests().anyRequest().authenticated();
 		http.exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint());
@@ -61,10 +61,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
-//
-//	private CustomerServiceImpl service() {
-//		return new CustomerServiceImpl();
-//	}
 
 	@Bean
 	public JWTConfig config() {

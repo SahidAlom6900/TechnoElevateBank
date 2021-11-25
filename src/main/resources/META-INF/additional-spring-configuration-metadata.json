@@ -38,5 +38,50 @@
     "name": "refresh.token",
     "type": "java.lang.String",
     "description": "A description for 'refresh.token'"
+  },
+  {
+    "name": "swagger.title",
+    "type": "java.lang.String",
+    "description": "A description for 'swagger.title'"
+  },
+  {
+    "name": "swagger.doc",
+    "type": "java.lang.String",
+    "description": "A description for 'swagger.doc'"
+  },
+  {
+    "name": "swagger.project.version",
+    "type": "java.lang.String",
+    "description": "A description for 'swagger.project.version'"
+  },
+  {
+    "name": "swagger.contact.username",
+    "type": "java.lang.String",
+    "description": "A description for 'swagger.contact.username'"
+  },
+  {
+    "name": "swagger.contact.website",
+    "type": "java.lang.String",
+    "description": "A description for 'swagger.contact.website'"
+  },
+  {
+    "name": "swagger.contact.email",
+    "type": "java.lang.String",
+    "description": "A description for 'swagger.contact.email'"
+  },
+  {
+    "name": "swagger.api.license",
+    "type": "java.lang.String",
+    "description": "A description for 'swagger.api.license'"
+  },
+  {
+    "name": "swagger.api.licenseurl",
+    "type": "java.lang.String",
+    "description": "A description for 'swagger.api.licenseurl'"
+  },
+  {
+    "name": "swagger.termsofservice",
+    "type": "java.lang.String",
+    "description": "A description for 'swagger.termsofservice'"
   }
 ]}

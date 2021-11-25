@@ -22,8 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.technoelevate.springboot.controller.CustomerController;
 import com.technoelevate.springboot.entity.Customer;
-import com.technoelevate.springboot.entity.UserPasswordDTO;
-import com.technoelevate.springboot.message.Message;
+import com.technoelevate.springboot.response.ResponseMessage;
 import com.technoelevate.springboot.service.CustomerService;
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(SpringExtension.class)
@@ -44,18 +43,17 @@ public class CustomerTestController {
 	@SuppressWarnings({ "unchecked"})
 	@Test
 	public void testDeposite() throws Exception {
-		UserPasswordDTO dto = new UserPasswordDTO("Sahid", "sahid@123");
-		Customer customer = new Customer(dto.getUserName(), dto.getPassword());
-		Message message = new Message();
+		Customer customer = new Customer("Sahid", "sahid@123");
+		ResponseMessage message = new ResponseMessage();
 		message.setData(customer);
 		Mockito.when(customerService.deposite(Mockito.anyDouble())).thenReturn(message);
-		String jsonObject = mapper.writeValueAsString(dto);
+		String jsonObject = mapper.writeValueAsString(customer);
 		String result = mockMvc
 				.perform(put("/api/v1/customer/deposite/" + 1000)
 						.contentType(MediaType.APPLICATION_JSON).content(jsonObject))
 				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn().getResponse().getContentAsString();
 		System.out.println(result);
-		Message message2 = mapper.readValue(result, Message.class);
+		ResponseMessage message2 = mapper.readValue(result, ResponseMessage.class);
 		Map<String, String> map = (Map<String, String>) message2.getData();
 		for (Map.Entry<String, String> dto1 : map.entrySet()) {
 			assertEquals(customer.getUserName(), dto1.getValue());
@@ -66,17 +64,16 @@ public class CustomerTestController {
 	@SuppressWarnings({ "unchecked"})
 	@Test
 	public void testWidtdraw() throws Exception {
-		UserPasswordDTO dto = new UserPasswordDTO("Sahid", "sahid@123");
-		Customer customer = new Customer(dto.getUserName(), dto.getPassword());
-		Message message = new Message();
+		Customer customer = new Customer("Sahid", "sahid@123");
+		ResponseMessage message = new ResponseMessage();
 		message.setData(customer);
 		Mockito.when(customerService.withdraw(Mockito.anyDouble())).thenReturn(message);
-		String jsonObject = mapper.writeValueAsString(dto);
+		String jsonObject = mapper.writeValueAsString(customer);
 		String result = mockMvc
 				.perform(put("/api/v1/customer/withdraw/" + 1000)
 						.contentType(MediaType.APPLICATION_JSON).content(jsonObject))
 				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn().getResponse().getContentAsString();
-		Message message2 = mapper.readValue(result, Message.class);
+		ResponseMessage message2 = mapper.readValue(result, ResponseMessage.class);
 		Map<String, String> map = (Map<String, String>) message2.getData();
 		for (Map.Entry<String, String> dto1 : map.entrySet()) {
 			assertEquals(customer.getUserName(), dto1.getValue());
@@ -87,17 +84,16 @@ public class CustomerTestController {
 	@SuppressWarnings({ "unchecked"})
 	@Test
 	public void testGetBalance() throws Exception {
-		UserPasswordDTO dto = new UserPasswordDTO("Sahid", "sahid@123");
-		Customer customer = new Customer(dto.getUserName(), dto.getPassword());
-		Message message1 = new Message();
+		Customer customer = new Customer("Sahid", "sahid@123");
+		ResponseMessage message1 = new ResponseMessage();
 		message1.setData(customer);
 		Mockito.when(customerService.getBalance()).thenReturn(message1);
-		String jsonObject = mapper.writeValueAsString(dto);
+		String jsonObject = mapper.writeValueAsString(customer);
 		String result = mockMvc
 				.perform(get("/api/v1/customer/balance")
 						.contentType(MediaType.APPLICATION_JSON).content(jsonObject))
 				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn().getResponse().getContentAsString();
-		Message message2 = mapper.readValue(result, Message.class);
+		ResponseMessage message2 = mapper.readValue(result, ResponseMessage.class);
 		Map<String, String> map = (Map<String, String>) message2.getData();
 		for (Map.Entry<String, String> customer1 : map.entrySet()) {
 			assertEquals(customer.getUserName(), customer1.getValue());

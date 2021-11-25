@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.technoelevate.springboot.controller.AdminController;
 import com.technoelevate.springboot.entity.Admin;
-import com.technoelevate.springboot.message.Message;
+import com.technoelevate.springboot.response.ResponseMessage;
 import com.technoelevate.springboot.service.AdminService;
 
 @ExtendWith(MockitoExtension.class)
@@ -44,7 +44,7 @@ public class AdminControllerTest {
 	@Test
 	public void testControllerReadAll() throws Exception {
 		Admin admin = new Admin(100, "Rakesh", "rakesh@123");
-		Message message = new Message();
+		ResponseMessage message = new ResponseMessage();
 		message.setData(admin);
 		Mockito.when(adminService.getAllCustomer()).thenReturn(message);
 		String jsonObject = mapper.writeValueAsString(admin);
@@ -52,7 +52,7 @@ public class AdminControllerTest {
 				.perform(get("/api/v1/admin/customers").contentType(MediaType.APPLICATION_JSON)
 						.content(jsonObject))
 				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn().getResponse().getContentAsString();
-		Message c = mapper.readValue(result, Message.class);
+		ResponseMessage c = mapper.readValue(result, ResponseMessage.class);
 		Map<String, String> map = (Map<String, String>) c.getData();
 		for (Map.Entry<String, String> m : map.entrySet()) {
 			assertEquals(admin.getUserName(), m.getValue());

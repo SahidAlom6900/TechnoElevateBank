@@ -16,6 +16,8 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
 	@Override
@@ -29,6 +31,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 			error.put("timestamp", LocalDateTime.now().toString());
 			error.put("error", exception.getMessage());
 			error.put("message", "Access Denied");
+			log.error(exception.getMessage());
 			response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 			new ObjectMapper().writeValue(response.getOutputStream(), error);
 		} catch (JsonGenerationException exception2) {

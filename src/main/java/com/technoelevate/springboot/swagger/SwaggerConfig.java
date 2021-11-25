@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,13 +24,15 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 	private final String AUTHORIZATION_HEADER = "Authorization";
+	@Autowired
+	private SwaggerProperty property;
 
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
 				.securityContexts(Arrays.asList(securityContext())).securitySchemes(Arrays.asList(apiKey())).select()
-				.apis(RequestHandlerSelectors.basePackage("com.technoelevate.springboot"))
-				.paths(PathSelectors.any()).build();
+				.apis(RequestHandlerSelectors.basePackage("com.technoelevate.springboot")).paths(PathSelectors.any())
+				.build();
 	}
 
 	private ApiKey apiKey() {
@@ -37,9 +40,9 @@ public class SwaggerConfig {
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfo("Spring Boot Blog REST APIs With JWT Based Authentication And Authorization", "Spring Boot Along With JWT Blog REST API Documentation", "1",
-				"Terms of service", new Contact("Sahid Alom", "https://technoelevate.com/technology.html", "sahidalom1234@gmail.com"),
-				"License of API", "API license URL", Collections.emptyList());
+		return new ApiInfo(property.getTitle(), property.getDoc(), property.getVersion(), property.getTermsOfService(),
+				new Contact(property.getUsername(), property.getWebsite(), property.getEmail()), property.getLicense(),
+				property.getLicenseurl(), Collections.emptyList());
 	}
 
 	private SecurityContext securityContext() {

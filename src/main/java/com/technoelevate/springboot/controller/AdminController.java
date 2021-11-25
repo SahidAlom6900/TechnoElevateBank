@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.technoelevate.springboot.message.Message;
+import com.technoelevate.springboot.response.ResponseMessage;
 import com.technoelevate.springboot.service.AdminService;
 
 import io.swagger.annotations.ApiOperation;
@@ -21,15 +21,14 @@ import lombok.extern.slf4j.Slf4j;
 public class AdminController {
 	@Autowired
 	private AdminService adminService;
-	
 
 	@GetMapping(path = "/customers")
 	@ApiOperation(value = "All Customers ", notes = "All Customers ", tags = "Bank Application")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Fetch Successfully"),
 			@ApiResponse(code = 404, message = "No Customer Found"),
 			@ApiResponse(code = 403, message = "Access Denied") })
-	public ResponseEntity<Message> getAllCustomer() {
+	public ResponseEntity<ResponseMessage> getAllCustomer() {
 		log.info("Fatch Successfully");
-		return new ResponseEntity<Message>(adminService.getAllCustomer(), HttpStatus.OK);
+		return new ResponseEntity<ResponseMessage>(adminService.getAllCustomer(), HttpStatus.OK);
 	}
 }

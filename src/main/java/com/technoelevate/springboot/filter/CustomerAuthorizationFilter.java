@@ -22,8 +22,10 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.technoelevate.springboot.exception.CustomAccessDeniedException;
-import com.technoelevate.springboot.service.CustomerServiceImpl;;
+import com.technoelevate.springboot.service.CustomerServiceImpl;
 
+import lombok.extern.slf4j.Slf4j;;
+@Slf4j
 public class CustomerAuthorizationFilter extends OncePerRequestFilter {
 	private CustomAccessDeniedException accessDenied;
 	private CustomerServiceImpl serviceImpl;
@@ -49,14 +51,13 @@ public class CustomerAuthorizationFilter extends OncePerRequestFilter {
 					DecodedJWT decodedJWT = verifier.verify(token);
 					String username = decodedJWT.getSubject();
 					String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
-					if (!roles[0].equalsIgnoreCase("ADMIN")) {
-						if (!serviceImpl.getCustomer().getUserName().equals(username)) {
-							try {
-								accessDenied.handle(request, response,
-										new AccessDeniedException("Unauthorized Access Token"));
-							} catch (Exception exception2) {
-								System.out.println(exception2.getMessage());
-							}
+					if (!serviceImpl.getCustomer().getUserName().equals(username)) {
+						try {
+							log.error("Unauthorized Access Token");
+							accessDenied.handle(request, response,
+									new AccessDeniedException("Unauthorized Access Token"));
+						} catch (Exception exception2) {
+							System.out.println(exception2.getMessage());
 						}
 					}
 					Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();

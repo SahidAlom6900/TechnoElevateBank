@@ -34,7 +34,7 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.technoelevate.springboot.entity.Customer;
-import com.technoelevate.springboot.message.Message;
+import com.technoelevate.springboot.response.ResponseMessage;
 import com.technoelevate.springboot.security.JWTConfig;
 import com.technoelevate.springboot.service.CustomerService;
 
@@ -59,9 +59,9 @@ public class CustomerController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Withdraw Successfully"),
 			@ApiResponse(code = 404, message = "Invalid Customer Id"),
 			@ApiResponse(code = 403, message = "Access Denied") })
-	public ResponseEntity<Message> withdraw(@PathVariable("amount") double amount) {
+	public ResponseEntity<ResponseMessage> withdraw(@PathVariable("amount") double amount) {
 		log.info(amount + "Amount Successfully Withdraw  ");
-		return new ResponseEntity<Message>(customerService.withdraw(amount), HttpStatus.OK);
+		return new ResponseEntity<ResponseMessage>(customerService.withdraw(amount), HttpStatus.OK);
 	}
 
 	@PutMapping(path = "/deposite/{amount}")
@@ -69,9 +69,9 @@ public class CustomerController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Deposite Successfully"),
 			@ApiResponse(code = 404, message = "Invalid Customer Id"),
 			@ApiResponse(code = 403, message = "Access Denied") })
-	public ResponseEntity<Message> deposite(@PathVariable("amount") double amount) {
+	public ResponseEntity<ResponseMessage> deposite(@PathVariable("amount") double amount) {
 		log.info(amount + "Amount Successfully Deposited  ");
-		return new ResponseEntity<Message>(customerService.deposite(amount), HttpStatus.OK);
+		return new ResponseEntity<ResponseMessage>(customerService.deposite(amount), HttpStatus.OK);
 	}
 
 	@GetMapping("/balance")
@@ -79,8 +79,8 @@ public class CustomerController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Deposite Successfully"),
 			@ApiResponse(code = 404, message = "Invalid Customer Id"),
 			@ApiResponse(code = 403, message = "Access Denied") })   
-	public ResponseEntity<Message> getBalance() {
-		return new ResponseEntity<Message>(customerService.getBalance(), HttpStatus.OK);
+	public ResponseEntity<ResponseMessage> getBalance() {
+		return new ResponseEntity<ResponseMessage>(customerService.getBalance(), HttpStatus.OK);
 	}
 
 	@GetMapping("/token/refresh")
@@ -100,7 +100,7 @@ public class CustomerController {
 				String username = decodedJWT.getSubject();
 				Customer customer = customerService.findByUserName(username);
 				Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-				authorities.add(new SimpleGrantedAuthority("USER"));
+				authorities.add(new SimpleGrantedAuthority(customer.getRoles()));
 				String access_token = JWT.create().withSubject(customer.getUserName())
 						.withExpiresAt(new Date(System.currentTimeMillis() + config.getAccess_token()))
 						.withIssuer(request.getRequestURI().toString())
