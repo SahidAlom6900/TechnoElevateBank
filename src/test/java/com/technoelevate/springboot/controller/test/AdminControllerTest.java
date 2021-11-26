@@ -1,4 +1,4 @@
-package com.technoelevate.springboot;
+package com.technoelevate.springboot.controller.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -20,13 +20,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.technoelevate.springboot.controller.AdminController;
-import com.technoelevate.springboot.entity.Admin;
+import com.technoelevate.springboot.entity.Customer;
 import com.technoelevate.springboot.response.ResponseMessage;
 import com.technoelevate.springboot.service.AdminService;
 
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(SpringExtension.class)
-public class AdminControllerTest {
+ class AdminControllerTest {
 	@InjectMocks
 	private AdminController adminController;
 	@Mock
@@ -43,11 +43,11 @@ public class AdminControllerTest {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testControllerReadAll() throws Exception {
-		Admin admin = new Admin(100, "Rakesh", "rakesh@123");
+		Customer customer=new Customer("Sahid", "123");
 		ResponseMessage message = new ResponseMessage();
-		message.setData(admin);
+		message.setData(customer);
 		Mockito.when(adminService.getAllCustomer()).thenReturn(message);
-		String jsonObject = mapper.writeValueAsString(admin);
+		String jsonObject = mapper.writeValueAsString(customer);
 		String result = mockMvc
 				.perform(get("/api/v1/admin/customers").contentType(MediaType.APPLICATION_JSON)
 						.content(jsonObject))
@@ -55,7 +55,7 @@ public class AdminControllerTest {
 		ResponseMessage c = mapper.readValue(result, ResponseMessage.class);
 		Map<String, String> map = (Map<String, String>) c.getData();
 		for (Map.Entry<String, String> m : map.entrySet()) {
-			assertEquals(admin.getUserName(), m.getValue());
+			assertEquals(customer.getUserName(), m.getValue());
 			break;
 		}
 	}

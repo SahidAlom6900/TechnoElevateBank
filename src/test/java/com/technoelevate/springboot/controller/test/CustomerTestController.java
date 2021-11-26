@@ -1,4 +1,4 @@
-package com.technoelevate.springboot;
+package com.technoelevate.springboot.controller.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -26,7 +26,7 @@ import com.technoelevate.springboot.response.ResponseMessage;
 import com.technoelevate.springboot.service.CustomerService;
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(SpringExtension.class)
-public class CustomerTestController {
+ class CustomerTestController {
 	@InjectMocks
 	private CustomerController customerController;
 	@Mock

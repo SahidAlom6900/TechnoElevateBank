@@ -1,4 +1,4 @@
-package com.technoelevate.springboot;
+package com.technoelevate.springboot.service.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,16 +21,23 @@ import com.technoelevate.springboot.repository.CustomerRepository;
 import com.technoelevate.springboot.response.ResponseMessage;
 import com.technoelevate.springboot.service.AdminServiceImpl;
 
+
+
+
+
+
+
+
+
 @ExtendWith(MockitoExtension.class)
 @ExtendWith(SpringExtension.class)
 public class AdminTestService {
+	@InjectMocks
+	private AdminServiceImpl adminServiceImpl;
 	@Mock
 	private AdminRepository adminRepository;
 	@Mock
-	private CustomerRepository repository;
-	@InjectMocks
-	private AdminServiceImpl service;
-
+	private CustomerRepository customerRepository;
 
 	@SuppressWarnings({ "unchecked", "unused" })
 	@Test
@@ -40,8 +47,8 @@ public class AdminTestService {
 		Customer customer = new Customer("Sahid", 8754854754l, "sahid@123", 10000, 0);
 		customer.setRoles("USER");
 		list.add(customer);
-		Mockito.when(repository.findAll()).thenReturn(list);
-		ResponseMessage message = service.getAllCustomer();
+		Mockito.when(customerRepository.findAll()).thenReturn(list);
+		ResponseMessage message = adminServiceImpl.getAllCustomer();
 		ArrayList<CustomerDto> customer1=(ArrayList<CustomerDto>)message.getData();
 		assertEquals(customer.getUserName(),customer1.get(0).getUserName());
 	}

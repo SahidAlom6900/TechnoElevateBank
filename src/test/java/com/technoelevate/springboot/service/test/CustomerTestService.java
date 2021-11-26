@@ -1,4 +1,4 @@
-package com.technoelevate.springboot;
+package com.technoelevate.springboot.service.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,7 +14,7 @@ import com.technoelevate.springboot.repository.BalanceDetailsRepo;
 import com.technoelevate.springboot.repository.CustomerRepository;
 import com.technoelevate.springboot.service.CustomerServiceImpl;
 @SpringBootTest
-public class CustomerTestService {
+ class CustomerTestService {
 	@Mock
 	private CustomerRepository repository;
 	@Mock
